@@ -1,0 +1,32 @@
+﻿@model IEnumerable<MVCSample.Entity.CustomerPL>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Customers</h1>
+
+<a asp-controller="Customer"
+   asp-action="Create"
+   class="btn btn-primary"
+   style="margin-bottom:10px">New Customer</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th class="text-center">Customer ID</th>
+            <th class="text-center">Full Name</th>
+            <th class="text-center">E-mail</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model)
+		{
+            <tr>
+                <td>@customer.CustomerId</td>
+                <td>@customer.FullName</td>
+                <td>@customer.Email</td>
+            </tr>
+		}
+    </tbody>
+</table>
+

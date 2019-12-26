@@ -1,0 +1,36 @@
+﻿@model MVCSample.Entity.CustomerPL
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Add New Customer</h1>
+
+<form method="post">
+       <div asp-validation-summary="ModelOnly"></div>
+
+        <div class="form-group col-md-6">
+            <label asp-for="FirstName">First Name</label>
+            <input type="text" asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label asp-for="LastName">Last Name</label>
+            <input type="text" asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label asp-for="Email">E-mail Address</label>
+            <input type="email" asp-for="Email" class="form-control"/>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div>
+            <span>
+                <button type="submit" id="btnSave" class="btn btn-success">Save</button>
+                <a asp-action="Index" class="btn btn-danger">Clear</a>
+            </span>
+        </div>
+</form>
+
