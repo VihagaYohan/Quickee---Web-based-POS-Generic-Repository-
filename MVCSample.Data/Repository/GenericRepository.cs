@@ -2,6 +2,7 @@
 using MVCSample.Data.Interface;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MVCSample.Data.Repository
@@ -24,6 +25,17 @@ namespace MVCSample.Data.Repository
 		public void Create(TEntity entity)
 		{
 			dataSet.Add(entity);
+			db.SaveChanges();
+		}
+
+		public TEntity FindById(int id) 
+		{
+			return dataSet.Find(id);
+		}
+
+		public void Update(TEntity entity) 
+		{
+			dataSet.Update(entity);
 			db.SaveChanges();
 		}
 	}

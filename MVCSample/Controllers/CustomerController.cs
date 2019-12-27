@@ -57,5 +57,58 @@ namespace MVCSample.Controllers
                 throw ex;
             }
         }
+
+        [HttpGet]
+        public IActionResult Edit(int Id) 
+        {
+            try
+            {
+                var CustomerEntity = service.FindById(Id);
+                var Customer = mapper.Map<CustomerPL>(CustomerEntity);
+                return View(Customer);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Edit(CustomerPL customer) 
+        {
+            if (ModelState.IsValid)
+            {
+                var CustomerEntity = mapper.Map<CustomerBL>(customer);
+                service.UpdateCustomer(CustomerEntity);
+
+                return RedirectToAction("Index");
+            }
+            else 
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int Id) 
+        {
+            try
+            {
+                var CustomerEntity = service.FindById(Id);
+                var Customer = mapper.Map<CustomerPL>(CustomerEntity);
+
+                return View(Customer);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(CustomerPL customer) 
+        {
+            return View();
+        }
     }
 }

@@ -8,5 +8,9 @@ namespace MVCSample.Data.Interface
 	{
 		IEnumerable<TEntity> GetAll();
 		void Create(TEntity entity);
+
+		TEntity FindById(int id);
+		void Update(TEntity entity);
+		
 	}
 }

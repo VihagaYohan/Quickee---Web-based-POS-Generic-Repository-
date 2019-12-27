@@ -16,6 +16,7 @@
             <th class="text-center">Customer ID</th>
             <th class="text-center">Full Name</th>
             <th class="text-center">E-mail</th>
+            <th class="text-center">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,11 @@
                 <td>@customer.CustomerId</td>
                 <td>@customer.FullName</td>
                 <td>@customer.Email</td>
+
+                <td>
+                    @Html.ActionLink("Edit","Edit","Customer",new {Id = customer.CustomerId}) |
+                    @Html.ActionLink("Delete","Delete","Customer",new {Id = customer.CustomerId })
+                </td>
             </tr>
 		}
     </tbody>

@@ -18,6 +18,7 @@ namespace MVCSample.Entity
 		public string LastName { get; set; }
 		
 		[Required(ErrorMessage ="Please enter e-mail address")]
+		[DataType(DataType.EmailAddress)]
 		public string Email { get; set; }
 		public string FullName 
 		{

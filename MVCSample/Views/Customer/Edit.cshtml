@@ -1,0 +1,41 @@
+﻿@model MVCSample.Entity.CustomerPL
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Details</h1>
+
+@*<h2>Customer Name : <span class="text-primary">@Model.FullName</span></h2>*@
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" asp-for="@Model.CustomerId"/>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label asp-for="FirstName">First Name</label>
+            <input asp-for="FirstName" class="form-control"/>
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label asp-for="LastName">Last Name</label>
+            <input asp-for="LastName" class="form-control"/>
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+    </div>    
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label asp-for="Email">E-mail Address</label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <span>
+            <button type="submit" class="btn btn-success">Update</button>
+            <a asp-action="Index" class="btn btn-danger">Cancel</a>
+        </span>
+    </div>
+</form>

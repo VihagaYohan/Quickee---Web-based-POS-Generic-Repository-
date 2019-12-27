@@ -9,5 +9,7 @@ namespace MVCSample.Business.IService
 	{
 		IEnumerable<CustomerBL> GetAll();
 		void AddCustomer(CustomerBL customer);
+		CustomerBL FindById(int id);
+		CustomerBL UpdateCustomer(CustomerBL customer);
 	}
 }

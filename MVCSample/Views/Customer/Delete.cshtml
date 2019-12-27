@@ -1,0 +1,32 @@
+﻿@model MVCSample.Entity.CustomerPL
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1 class="text-center">Remove Customer</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th class="text-center">Customer ID</th>
+            <th class="text-center">Customer Name</th>
+            <th class="text-center">E-mail Address</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>@Model.CustomerId</td>
+            <td>@Model.FullName</td>
+            <td>@Model.Email</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="text-center">
+    <span>
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-action="Index" class="btn btn-success">Cancel</a>
+    </span>
+</div>
+

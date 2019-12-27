@@ -29,7 +29,6 @@ namespace MVCSample.Business
 			}
 			catch (Exception ex)
 			{
-
 				throw ex;
 			}
 		}
@@ -44,7 +43,28 @@ namespace MVCSample.Business
 			}
 			catch (Exception ex)
 			{
+				throw ex;
+			}
+		}
 
+		public CustomerBL FindById(int id)
+		{
+			var customer = unitOfWork.CustomerRepository.FindById(id);
+			return mapper.Map<CustomerBL>(customer);
+		}
+
+		public CustomerBL UpdateCustomer(CustomerBL customer)
+		{
+			try
+			{
+				var CustomerEntity = mapper.Map<Customer>(customer);
+				unitOfWork.CustomerRepository.Update(CustomerEntity);
+				unitOfWork.Save();
+
+				return customer;
+			}
+			catch (Exception ex)
+			{
 				throw ex;
 			}
 		}
