@@ -68,5 +68,10 @@ namespace MVCSample.Business
 				throw ex;
 			}
 		}
+
+		public void DeleteCustomer(CustomerBL customer)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

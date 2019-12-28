@@ -105,10 +105,18 @@ namespace MVCSample.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpPost]
         public IActionResult Delete(CustomerPL customer) 
         {
-            return View();
+            try
+            {
+                
+                return View();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

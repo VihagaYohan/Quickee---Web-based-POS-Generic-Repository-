@@ -11,6 +11,8 @@ namespace MVCSample.Data.Repository
 	{
 		private readonly QuickeeContext context;
 		private GenericRepository<Customer> customerRepository;
+		private GenericRepository<Product> productRepository;
+		private GenericRepository<Order> orderRepository;
 
 		public UnitOfWork(DbContext context)
 		{
@@ -26,6 +28,30 @@ namespace MVCSample.Data.Repository
 					this.customerRepository = new GenericRepository<Customer>(context);
 				}
 				return customerRepository;
+			}
+		}
+
+		public GenericRepository<Product> ProductRepository 
+		{
+			get 
+			{
+				if (this.productRepository == null) 
+				{
+					this.productRepository = new GenericRepository<Product>(context);
+				}
+				return productRepository;
+			}
+		}
+
+		public GenericRepository<Order> OrderRepository 
+		{
+			get 
+			{
+				if (this.orderRepository == null) 
+				{
+					this.orderRepository = new GenericRepository<Order>(context);
+				}
+				return orderRepository;
 			}
 		}
 

@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MVCSample.Business;
 using MVCSample.Business.IService;
+using MVCSample.Business.Service;
 using MVCSample.Data;
 using MVCSample.Data.Interface;
 using MVCSample.Data.Repository;
@@ -38,6 +39,7 @@ namespace MVCSample
 			services.AddScoped<DbContext, QuickeeContext>();
 
 			services.AddTransient<ICustomerService, CustomerService>();
+			services.AddTransient<IProductService, ProductService>();
 			services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 			services.AddControllersWithViews();

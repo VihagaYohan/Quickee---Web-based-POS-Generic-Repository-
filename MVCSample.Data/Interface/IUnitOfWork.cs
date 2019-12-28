@@ -9,6 +9,8 @@ namespace MVCSample.Data.Interface
 	public interface IUnitOfWork
 	{
 		GenericRepository<Customer> CustomerRepository { get; }
+		GenericRepository<Product> ProductRepository { get; }
+		GenericRepository<Order> OrderRepository { get;  }
 		void Save();
 	}
 }

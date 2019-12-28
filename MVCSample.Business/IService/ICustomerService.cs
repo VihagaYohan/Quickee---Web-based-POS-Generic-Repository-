@@ -11,5 +11,6 @@ namespace MVCSample.Business.IService
 		void AddCustomer(CustomerBL customer);
 		CustomerBL FindById(int id);
 		CustomerBL UpdateCustomer(CustomerBL customer);
+		void DeleteCustomer(CustomerBL customer);
 	}
 }

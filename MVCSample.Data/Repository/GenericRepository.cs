@@ -38,5 +38,11 @@ namespace MVCSample.Data.Repository
 			dataSet.Update(entity);
 			db.SaveChanges();
 		}
+
+		public void Delete(TEntity entity) 
+		{
+			dataSet.Remove(entity);
+			db.SaveChanges();
+		}
 	}
 }

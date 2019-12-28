@@ -11,6 +11,8 @@ namespace MVCSample.Data.Interface
 
 		TEntity FindById(int id);
 		void Update(TEntity entity);
+
+		void Delete(TEntity entity);
 		
 	}
 }
