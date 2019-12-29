@@ -25,6 +25,10 @@
     <ProjectReference Include="..\MVCSample.Data\MVCSample.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
 
 
 </Project>

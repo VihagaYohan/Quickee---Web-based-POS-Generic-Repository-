@@ -11,6 +11,7 @@ namespace MVCSample.Data.Interface
 		GenericRepository<Customer> CustomerRepository { get; }
 		GenericRepository<Product> ProductRepository { get; }
 		GenericRepository<Order> OrderRepository { get;  }
+		QuickeeContext Context { get; }
 		void Save();
 	}
 }

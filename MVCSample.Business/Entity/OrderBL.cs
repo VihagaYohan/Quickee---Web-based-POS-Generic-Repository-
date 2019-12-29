@@ -10,7 +10,7 @@ namespace MVCSample.Business.Entity
 		public int CustomerId { get; set; }
 		public CustomerBL Customer { get; set; }
 		public DateTime OrderDate { get; set; }
-		public List<OrderItemBL> OrderItems { get; set; }
+		public IEnumerable<OrderItemBL> OrderItems { get; set; }
 		public decimal TotalAmount { get; set; }
 	}
 }

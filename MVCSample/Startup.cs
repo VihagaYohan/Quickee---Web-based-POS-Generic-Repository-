@@ -40,6 +40,7 @@ namespace MVCSample
 
 			services.AddTransient<ICustomerService, CustomerService>();
 			services.AddTransient<IProductService, ProductService>();
+			services.AddTransient<IOrderService, OrderService>();
 			services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 			services.AddControllersWithViews();
@@ -59,7 +60,14 @@ namespace MVCSample
 				app.UseHsts();
 			}
 			app.UseHttpsRedirection();
-			app.UseStaticFiles();
+			app.UseStaticFiles(new StaticFileOptions()
+			{
+				OnPrepareResponse = context =>
+				{
+					context.Context.Response.Headers.Add("Cache-control", "no-cache, no-store");
+					context.Context.Response.Headers.Add("Expires", "-1");
+				}
+			});
 
 			app.UseRouting();
 

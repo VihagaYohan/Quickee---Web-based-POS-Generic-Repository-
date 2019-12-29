@@ -13,6 +13,7 @@ namespace MVCSample.Data.Repository
 		private GenericRepository<Customer> customerRepository;
 		private GenericRepository<Product> productRepository;
 		private GenericRepository<Order> orderRepository;
+		public QuickeeContext Context => context as QuickeeContext;
 
 		public UnitOfWork(DbContext context)
 		{
@@ -54,7 +55,6 @@ namespace MVCSample.Data.Repository
 				return orderRepository;
 			}
 		}
-
 		public void Save()
 		{
 			context.SaveChanges();

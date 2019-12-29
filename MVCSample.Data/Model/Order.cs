@@ -10,7 +10,7 @@ namespace MVCSample.Data.Model
 		public int CustomerId { get; set; }
 		public Customer Customer { get; set; }
 		public DateTime OrderDate { get; set; }
-		public List<OrderItem> OrderItems { get; set; }
+		public IEnumerable<OrderItem> OrderItems { get; set; }
 		public decimal TotalAmount { get; set; }
 	}
 }

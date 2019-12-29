@@ -25,7 +25,7 @@ namespace MVCSample.Data.Repository
 		public void Create(TEntity entity)
 		{
 			dataSet.Add(entity);
-			db.SaveChanges();
+			//db.SaveChanges();
 		}
 
 		public TEntity FindById(int id) 
