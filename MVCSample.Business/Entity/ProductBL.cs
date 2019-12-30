@@ -14,5 +14,7 @@ namespace MVCSample.Business.Entity
 		public int Quantity { get; set; }
 		public decimal UnitPrice { get; set; }
 		public bool Availability { get; set; }
+
+		public int QuantityToBeAdd { get; set; }
 	}
 }

@@ -9,5 +9,10 @@ namespace MVCSample.Business.IService
 	{
 		IEnumerable<OrderBL> GetAll();
 		void AddOrder(OrderBL order);
+		OrderBL FindById(int id);
+
+		void UpdateOrder(OrderBL order);
+
+		void DeleteOrder(OrderBL order);
 	}
 }

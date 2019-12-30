@@ -17,5 +17,6 @@ namespace MVCSample.ViewModels
 		[Required(ErrorMessage = "Select an customer from viewModel")]
 		public CustomerPL Customer { get; set; }
 		public ProductPL Product { get; set; }
+		public OrderPL Order { get; set; }
 	}
 }

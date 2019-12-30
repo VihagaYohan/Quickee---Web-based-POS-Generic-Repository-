@@ -1,0 +1,41 @@
+﻿@model MVCSample.Entity.OrderPL
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1 class="text-center text-danger">Delete Order</h1>
+
+<form asp-action="DeleteOrder" method="post">
+    <input hidden type="text" name="id" value="@Model.OrderId" />
+
+    <h2 class="text-center text-primary">Order ID : @Model.OrderId</h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Customer ID</th>
+                <th>Order Date</th>
+                <th>Order Amount</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>@Model.CustomerId</td>
+                <td>@Model.OrderDate</td>
+                <td>@Model.TotalAmount</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="text-center">
+        <span>
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a asp-action="Index" class="btn btn-success">Cancel</a>
+        </span>
+    </div>
+
+</form>
+
+

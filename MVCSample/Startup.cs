@@ -38,10 +38,10 @@ namespace MVCSample
 
 			services.AddScoped<DbContext, QuickeeContext>();
 
-			services.AddTransient<ICustomerService, CustomerService>();
-			services.AddTransient<IProductService, ProductService>();
-			services.AddTransient<IOrderService, OrderService>();
-			services.AddTransient<IUnitOfWork, UnitOfWork>();
+			services.AddScoped<ICustomerService, CustomerService>();
+			services.AddScoped<IProductService, ProductService>();
+			services.AddScoped<IOrderService, OrderService>();
+			services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 			services.AddControllersWithViews();
 		}

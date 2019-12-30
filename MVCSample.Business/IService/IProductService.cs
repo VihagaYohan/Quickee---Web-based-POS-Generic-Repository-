@@ -10,6 +10,6 @@ namespace MVCSample.Business.IService
 		IEnumerable<ProductBL> GetAll();
 
 		ProductBL FindById(int id);
-		void UpdateQuantity(IEnumerable<OrderItemBL> OrderItems);
+		void UpdateQuantity(IEnumerable<OrderItemBL> OrderItems,bool AddItems);
 	}
 }

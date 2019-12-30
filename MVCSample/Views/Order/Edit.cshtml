@@ -1,0 +1,127 @@
+﻿@model MVCSample.ViewModels.OrderViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<form method="post">
+    <div class="center-block">
+        <table class="table">
+            <tr>
+                @* customer drop down *@
+                <td class="form-group col-sm-2">Customer Name</td>
+
+                <td class="col-sm-3">
+                    <select id="customerId" class="form-control">
+                        <option value="@Model.Customer.CustomerId" selected>@Model.Customer.FullName</option>
+                        @foreach (var customer in Model.Customers)
+                        {
+                            <option class="customerUniq_id" value="@customer.CustomerId">@customer.FullName</option>
+                        }
+                    </select>
+                </td>
+
+                @* product drop down *@
+                <td class="form-group col-sm-2">Product Name</td>
+
+                <td class="col-sm-3">
+                    <select id="productId" class="form-control">
+                        <option>Select a product</option>
+                        @foreach (var product in Model.Products)
+                        {
+                            <option value="@product.ProductId"
+                                    data-unit-price="@product.UnitPrice">
+                                @product.Name
+                            </option>
+                        }
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        @* add order button and order cancel button *@
+        <div class="text-center">
+            <span>
+                <button type="submit" id="btnAdd" class="btn btn-primary">Add</button>
+            </span>
+        </div>
+
+        <table id="orderItems" class="table">
+            <thead class="text-center">
+                <tr>
+                    <th></th>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody id="table-OrderItems">
+
+                @foreach (var orderItem in Model.Order.OrderItems)
+                {
+                    <tr class="table-Row">
+                        @* order line item Id *@
+                        <td>
+                            <input type="hidden" id="@orderItem.OrderItemId" value="@orderItem.OrderItemId" />
+                        </td>
+
+                        @* product id *@
+                        <td>
+                            <label>@orderItem.ProductId</label>
+                        </td>
+
+                        @* product name *@
+                        <td>
+                            <label>@orderItem.ProductName</label>
+                        </td>
+
+                        @* quantity  *@
+                        <td class="col-xs-2" onclick="calculateLineTotal(this)">
+                            <input class="form-control"
+                                   type="number"
+                                   id="sample"
+                                   value="@orderItem.Quantity" />
+                        </td>
+
+                        @* unit price *@
+                        <td class="col-sm-2">
+                            <label id="unitPrice">@orderItem.UnitPrice</label>
+                        </td>
+
+                        @* order line item total *@
+                        <td>
+                            <label>@orderItem.LineTotal</label>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+            <tfoot>
+                <tr id="row_grandTotal">
+                    <td></td>
+                    <td class="text-primary">Grand Total</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td id="grandTotal" class="text-primary">@Model.Order.TotalAmount</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="text-center">
+        <span>
+            <button type="submit" id="btnUpdate" class="btn btn-success">Update</button>
+            <a asp-action="Index" class="btn btn-danger">Cancel</a>
+        </span>
+    </div>
+
+</form>
+
+<script src="~/js/Order/UpdateOrder.js"></script>
