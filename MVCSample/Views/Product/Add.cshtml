@@ -1,0 +1,41 @@
+﻿@model MVCSample.Entity.ProductPL
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h1>Add Product</h1>
+
+<form asp-action="Add" method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <label>Product Name</label>
+        <input type="text" asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Product Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Quantity</label>
+        <input type="number" asp-for="Quantity" class="form-control" min="1" value="1"/>
+        <span asp-validation-for="Quantity" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Unit Price</label>
+        <input type="number" asp-for="UnitPrice" class="form-control"/>
+        <span asp-validation-for="UnitPrice" class="text-danger"></span>
+    </div>
+
+    <div>
+        <span>
+            <button type="submit" class="btn btn-success">Add</button>
+            <a asp-action="Index" class="btn btn-danger">Cancel</a>
+        </span>
+    </div>
+</form>
+

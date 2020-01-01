@@ -8,8 +8,8 @@ namespace MVCSample.Business.IService
 	public interface IProductService
 	{
 		IEnumerable<ProductBL> GetAll();
-
+		void Add(ProductBL product);
 		ProductBL FindById(int id);
-		void UpdateQuantity(IEnumerable<OrderItemBL> OrderItems,bool AddItems);
+		void UpdateQuantity(IEnumerable<OrderItemBL> OrderItems);
 	}
 }

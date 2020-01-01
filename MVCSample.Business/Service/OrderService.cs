@@ -67,7 +67,7 @@ namespace MVCSample.Business.Service
 							unitOfWork.Save();
 
 							var ls_OrderItems = mapper.Map<IEnumerable<OrderItemBL>>(objOrder.OrderItems);
-							productService.UpdateQuantity(ls_OrderItems,false);
+							productService.UpdateQuantity(ls_OrderItems);
 
 							transaction.Commit();
 						}
@@ -123,7 +123,7 @@ namespace MVCSample.Business.Service
 								unitOfWork.Save();
 
 								var ls_OrderItems = mapper.Map<IEnumerable<OrderItemBL>>(order.OrderItems);
-								productService.UpdateQuantity(ls_OrderItems,false);
+								productService.UpdateQuantity(ls_OrderItems);
 
 								transaction.Commit();
 							}
@@ -159,7 +159,7 @@ namespace MVCSample.Business.Service
 							try
 							{
 								var ls_OrderItems = mapper.Map<IEnumerable<OrderItemBL>>(order.OrderItems);
-								productService.UpdateQuantity(ls_OrderItems,true);
+								productService.UpdateQuantity(ls_OrderItems);
 
 								var objOrder = mapper.Map<Order>(order);
 								unitOfWork.OrderRepository.Delete(objOrder);

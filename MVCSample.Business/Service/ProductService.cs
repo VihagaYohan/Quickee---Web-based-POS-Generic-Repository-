@@ -6,6 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using MVCSample.Business.Exceptions;
+using MVCSample.Data.Model;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace MVCSample.Business.Service
 {
@@ -25,8 +28,22 @@ namespace MVCSample.Business.Service
 		{
 			try
 			{
-				var ls_Product = unitOfWork.ProductRepository.GetAll();
+				var ls_Product = unitOfWork.ProductRepository.GetAll().OrderBy(p => p.ProductId);
 				return mapper.Map<IEnumerable<ProductBL>>(ls_Product);
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+
+		public void Add(ProductBL entity) 
+		{
+			try
+			{
+				var product = mapper.Map<Product>(entity);
+				unitOfWork.ProductRepository.Create(product);
+				unitOfWork.Save();
 			}
 			catch (Exception ex)
 			{
@@ -47,56 +64,57 @@ namespace MVCSample.Business.Service
 			}
 		}
 
-		public void UpdateQuantity(IEnumerable<OrderItemBL> OrderItems,bool AddItems)
+		public void UpdateQuantity(IEnumerable<OrderItemBL> OrderItems)
 		{
 			try
 			{
-				foreach (var item in OrderItems)
+				if (OrderItems == null)
 				{
-					if (item == null)
+					throw new OrderItemNotFoundException();
+				}
+				else 
+				{
+					foreach (var item in OrderItems)
 					{
-						throw new OrderItemNotFoundException();
-					}
-					else 
-					{
-						using (var transaction = unitOfWork.Context.Database.BeginTransaction()) 
+						try
 						{
-							try
-							{
-								var product = unitOfWork.ProductRepository.FindById(item.ProductId);
-								var CurrentQuantity = product.Quantity;
-								var RequestedQuantity = item.Quantity;
-								int NewQuantity = 0;
+							var product = unitOfWork.ProductRepository.FindById(item.ProductId);
+							var existingOrderItem = unitOfWork.Context.OrderItems.AsNoTracking()
+																				 .FirstOrDefault(o => o.OrderItemId == o.OrderItemId);
+							var existingQuantity = existingOrderItem.Quantity;
+							var CurrentQtyInStock = product.Quantity;
+							var RequestedQuantity = item.Quantity;
+							var QuantityToBeUpdated = 0;
+							var NewQuantity = 0;
 
-								if (AddItems == true)
-								{
-									product.QuantityToBeAdd = RequestedQuantity;
-									NewQuantity = CurrentQuantity + product.QuantityToBeAdd;
-								}
-								else
-								{
-									if (RequestedQuantity <= CurrentQuantity)
-									{
-										NewQuantity = CurrentQuantity - RequestedQuantity;
-									}
-									else if (RequestedQuantity > CurrentQuantity)
-									{
-										throw new NotEnoughQuantityException();
-									}
-									else
-									{
-										throw new ProductNotAvailableException();
-									}
-								}
-								product.Quantity = NewQuantity;
-								unitOfWork.ProductRepository.Update(product);
-								unitOfWork.Save();
-							}
-							catch (Exception ex)
+							if (RequestedQuantity < existingQuantity)
 							{
-								transaction.Rollback();
-								throw new Exception(ex.Message);
+								QuantityToBeUpdated = existingQuantity - RequestedQuantity;
+								NewQuantity = CurrentQtyInStock + QuantityToBeUpdated;
 							}
+							else if (RequestedQuantity > existingQuantity)
+							{
+								QuantityToBeUpdated = RequestedQuantity - existingQuantity;
+								NewQuantity = CurrentQtyInStock - QuantityToBeUpdated;
+							}
+							else if (RequestedQuantity == existingQuantity)
+							{
+								NewQuantity = CurrentQtyInStock - RequestedQuantity;
+							}
+
+							if (CurrentQtyInStock == 0)
+							{
+								throw new NotEnoughQuantityException();
+							}
+
+							product.Quantity = NewQuantity;
+							unitOfWork.ProductRepository.Update(product);
+							unitOfWork.Save();
+						}
+						catch (Exception ex)
+						{
+							transaction.Rollback();
+							throw new Exception(ex.Message);
 						}
 					}
 				}

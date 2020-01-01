@@ -1,0 +1,35 @@
+﻿@model IEnumerable<MVCSample.Entity.ProductPL>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>List Of Products</h1>
+
+<a asp-action="Add"
+   class="btn btn-primary">
+    Add Product
+	
+</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Product Desctiption</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var product in Model)
+		{
+            <tr>
+                <td>@product.ProductId</td>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.UnitPrice</td>
+            </tr>
+		}
+    </tbody>
+</table>
